@@ -1,0 +1,42 @@
+drop table customer cascade constraints;
+create table customer( 
+ id varchar2(255) primary key,
+ pw number,
+ name varchar2(10),
+ addr varchar2(255),
+ state varchar2(255) default 'customer'
+ );
+
+insert into customer (id,pw,name,state)  values ('admin',1234,'관리자','admin');
+ 
+  		
+ drop table products cascade constraints;
+ create table products(
+ code number primary key,
+ name varchar2(255),
+ price number,
+ stock number
+ );
+ 
+ insert into products values(1,'떡볶이',3000,10);
+ insert into products values(2,'튀김',1000,10);
+ insert into products values(3,'순대',3000,10);
+ insert into products values(4,'쿨피스',1000,10);
+ 
+ drop sequence baskseq;
+ create sequence baskseq
+ 	increment by 1
+ 	start with 1
+ 	minvalue 1
+ 	nocache;
+ 
+ drop table basket;
+ create table basket(
+ no number primary key,
+ id varchar2(255) references customer(id) on delete cascade,
+ code number references products(code) on delete cascade,
+ name varchar2(255),
+ price number,
+ stock number
+ );
+ 
