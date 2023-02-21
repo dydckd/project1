@@ -1,6 +1,8 @@
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,16 +20,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.event.ListSelectionEvent;
-import javax.xml.crypto.dsig.spec.C14NMethodParameterSpec;
-
-import oracle.net.aso.p;
 
 public class Main extends JFrame implements ActionListener{
 	JTable ptable = null;
 	JTable btable = null;
-	JTable otable = null;
+	JTable otable = null;	
 	JTable adtable = null;
+	Font labelfont = null;
 
 	JScrollPane pscrollPane = null;
 	JScrollPane bscrollPane = null;
@@ -88,6 +88,7 @@ public class Main extends JFrame implements ActionListener{
 	JButton orderCheckbtn = null;
 	JButton orderExitbtn = null;
 	JLabel price = null;
+	JLabel totalP = null;
 	ArrayList<BasketDto> olists = null;
 
 	//admin
@@ -131,40 +132,57 @@ public class Main extends JFrame implements ActionListener{
 
 
 		cards = new JPanel(new CardLayout());
-		cards.setBounds(0,0,700,700);
-
+		cards.setBounds(0,0,700,550);
+		labelfont = new Font("맑은 고딕",Font.BOLD,20);
+		Font buttonfont = new Font("맑은 고딕",Font.BOLD,14);
 		//login 패널
-		login = new JPanel();
+
+		ImageIcon icon = new ImageIcon("C:\\Users\\lyc\\java\\Project_이용창\\src\\로그인 이미지.jpg");
+		login = new JPanel() {
+			public void paintComponent(Graphics g) {
+				g.drawImage(icon.getImage(), 0, 0, null);
+				setOpaque(false);
+				super.paintComponent(g);
+			}
+		};
 		login.setLayout(null);
-
-		login.setBounds(0, 0, 600, 600);
-
+		login.setBounds(0, 0, 600, 550);
+		
+		JLabel loginlabel = new JLabel("쌍용 분식");
+		loginlabel.setBounds(230, 100, 500, 50);
+		loginlabel.setFont(new Font("맑은 고딕",Font.BOLD,50));
 		loginidJLabel =new JLabel("id");
 		loginpwJLable =new JLabel("pw");
-
-		loginidJLabel.setBounds(100, 200, 100, 20);
-		loginpwJLable.setBounds(100, 240, 100, 20);
+		loginidJLabel.setFont(labelfont);
+		loginpwJLable.setFont(labelfont);
+		loginidJLabel.setBounds(200, 200, 100, 20);
+		loginpwJLable.setBounds(200, 240, 100, 20);
 
 		loginidField = new JTextField();
 		loginpwField = new JTextField();
 
-		loginidField.setBounds(220, 200, 100, 20);
-		loginpwField.setBounds(220, 240, 100, 20);
+		loginidField.setBounds(300, 200, 100, 20);
+		loginpwField.setBounds(300, 240, 100, 20);
 
 
 		loginButton =new JButton("로그인");
 		joinButton =new JButton("회원 가입");
 		deleteButton =new JButton("회원 탈퇴");
 
-		loginButton.setBounds(100,300,100,50);
-		joinButton.setBounds(250,300,100,50);
-		deleteButton.setBounds(400,300,100,50);
+		loginButton.setFont(buttonfont);
+		joinButton.setFont(buttonfont);
+		deleteButton.setFont(buttonfont);
+
+
+		loginButton.setBounds(420,210,100,50);
+		joinButton.setBounds(200,300,100,50);
+		deleteButton.setBounds(350,300,100,50);
 
 		loginButton.addActionListener(this);	
 		joinButton.addActionListener(this);
 		deleteButton.addActionListener(this);
 
-
+		login.add(loginlabel);
 		login.add(loginidJLabel);
 		login.add(loginpwJLable);
 		login.add(loginidField);
@@ -178,36 +196,52 @@ public class Main extends JFrame implements ActionListener{
 		join = new JPanel();
 		join.setLayout(null);
 
-		join.setBounds(0, 0, 600, 600);
+		join.setBounds(0, 0, 600, 550);
 
+		JLabel joinlabel = new JLabel("회원가입");
 		joinIdJLabel =new JLabel("id");
 		joinPwJLabel =new JLabel("pw");
 		joinNameJLabel =new JLabel("이름");
 		joinAddrJLabel =new JLabel("주소");
 
-		joinIdJLabel.setBounds(100, 100, 100, 20);
-		joinPwJLabel.setBounds(100, 150, 100, 20);
-		joinNameJLabel.setBounds(100, 200, 100, 20);
-		joinAddrJLabel.setBounds(100, 250, 100, 20);
+		joinlabel.setBounds(250, 20, 200, 50);
+		joinIdJLabel.setBounds(220, 100, 100, 20);
+		joinPwJLabel.setBounds(220, 170, 100, 20);
+		joinNameJLabel.setBounds(220, 240, 100, 20);
+		joinAddrJLabel.setBounds(220, 310, 100, 20);
+
+		joinlabel.setFont(new Font("맑은 고딕",Font.BOLD,30));
+		joinIdJLabel.setFont(labelfont);
+		joinPwJLabel.setFont(labelfont);
+		joinNameJLabel.setFont(labelfont);
+		joinAddrJLabel.setFont(labelfont);
 
 		joinIdField = new JTextField();
 		joinPwField = new JTextField();
 		joinNameField = new JTextField();
 		joinAddrField = new JTextField();
 
-		joinIdField.setBounds(220, 100, 100, 20);
-		joinPwField.setBounds(220, 150, 100, 20);
-		joinNameField.setBounds(220, 200, 100, 20);
-		joinAddrField.setBounds(220, 250, 100, 20);
+		joinIdField.setBounds(200, 130, 200, 20);
+		joinPwField.setBounds(200, 200, 200, 20);
+		joinNameField.setBounds(200, 270, 200, 20);
+		joinAddrField.setBounds(200, 340, 200, 20);
 
 		agreeButton = new JButton("가입하기");
 		cancelButton = new JButton("취소");
-		agreeButton.setBounds(150, 300, 100, 50);
-		cancelButton.setBounds(300, 300, 100, 50);
+		agreeButton.setBounds(180, 400, 100, 50);
+		cancelButton.setBounds(330, 400, 100, 50);
+
+		agreeButton.setFont(buttonfont);
+		agreeButton.setBackground(Color.black);
+		agreeButton.setForeground(Color.white);
+		cancelButton.setFont(buttonfont);
+		cancelButton.setBackground(Color.black);
+		cancelButton.setForeground(Color.white);
 
 		agreeButton.addActionListener(this);
 		cancelButton.addActionListener(this);
 
+		join.add(joinlabel);
 		join.add(joinIdJLabel);
 		join.add(joinPwJLabel);
 		join.add(joinNameJLabel);
@@ -222,29 +256,43 @@ public class Main extends JFrame implements ActionListener{
 		//탈퇴 패널
 		delete = new JPanel();
 		delete.setLayout(null);
-		delete.setBounds(0, 0, 600, 600);
+		delete.setBounds(0, 0, 600, 550);
 
+		JLabel deleteJLabel = new JLabel("회원탈퇴");
 		deleteIdJLabel =new JLabel("id");
 		deletePwJLabel =new JLabel("pw");
 
-		deleteIdJLabel.setBounds(100, 100, 100, 20);
-		deletePwJLabel.setBounds(100, 150, 100, 20);
+		deleteJLabel.setBounds(250, 20, 200, 50);
+		deleteIdJLabel.setBounds(220, 140, 100, 20);
+		deletePwJLabel.setBounds(220, 210, 100, 20);
+
+		deleteJLabel.setFont(new Font("맑은 고딕",Font.BOLD,30));
+		deleteIdJLabel.setFont(labelfont);
+		deletePwJLabel.setFont(labelfont);
 
 		deleteIdField = new JTextField();
 		deletePwField = new JTextField();
 
-		deleteIdField.setBounds(220, 100, 100, 20);
-		deletePwField.setBounds(220, 150, 100, 20);
+		deleteIdField.setBounds(200, 170, 200, 20);
+		deletePwField.setBounds(200, 240, 200, 20);
 
 		deleteCheckButton = new JButton("탈퇴");
 		deleteCancelButton = new JButton("취소");
 
-		deleteCheckButton.setBounds(150, 300, 100, 50);
-		deleteCancelButton.setBounds(300, 300, 100, 50);
+		deleteCheckButton.setBounds(180, 350, 100, 50);
+		deleteCancelButton.setBounds(330, 350, 100, 50);
+
+		deleteCheckButton.setFont(buttonfont);
+		deleteCheckButton.setBackground(Color.black);
+		deleteCheckButton.setForeground(Color.white);
+		deleteCancelButton.setFont(buttonfont);
+		deleteCancelButton.setBackground(Color.black);
+		deleteCancelButton.setForeground(Color.white);
 
 		deleteCheckButton.addActionListener(this);
 		deleteCancelButton.addActionListener(this);
 
+		delete.add(deleteJLabel);
 		delete.add(deleteIdJLabel);
 		delete.add(deletePwJLabel);
 		delete.add(deleteIdField);
@@ -266,17 +314,25 @@ public class Main extends JFrame implements ActionListener{
 		ptable = new JTable(productRowData,productColumName);
 		btable = new JTable(basketRowData,basketColumName);
 
+		btable.setFont(labelfont);
+		btable.setRowHeight(40);
+		btable.setBackground(Color.white);
+
+		ptable.setFont(labelfont);
+		ptable.setRowHeight(40);
+
 		ptable.addMouseListener(new MouseHandler());
 		btable.addMouseListener(new MouseHandler());
 
-		pscrollPane = new JScrollPane(ptable);
-		bscrollPane = new JScrollPane(btable);
-		pscrollPane.setBounds(0, 0, 680, 250);
-		bscrollPane.setBounds(0, 250, 680, 250);
+		pscrollPane = new JScrollPane(ptable,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		bscrollPane = new JScrollPane(btable,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		pscrollPane.setBounds(0, 0, 690, 235);
+		bscrollPane.setBounds(0, 235, 690, 235);
+		bscrollPane.setViewportView(btable);
 
 		JPanel button = new JPanel();
 		button.setLayout(new GridLayout(1,4));
-		button.setBounds(0, 500, 680, 100);
+		button.setBounds(0, 470, 690, 50);
 
 		productsInsertbtn = new JButton("담기");
 		productsdeletebtn = new JButton("삭제");
@@ -287,6 +343,11 @@ public class Main extends JFrame implements ActionListener{
 		productsdeletebtn.addActionListener(this);
 		productsOrderbtn.addActionListener(this);
 		productslogoutbtn.addActionListener(this);
+
+		productsInsertbtn.setFont(buttonfont);
+		productsdeletebtn.setFont(buttonfont);
+		productsOrderbtn.setFont(buttonfont);
+		productslogoutbtn.setFont(buttonfont);
 
 		button.add(productsInsertbtn);
 		button.add(productsdeletebtn);
@@ -304,30 +365,42 @@ public class Main extends JFrame implements ActionListener{
 		//주문하기 패널
 		order = new JPanel();
 		order.setLayout(null);
+		order.setBackground(Color.orange);
 		olists = bdao.getAllProducts(id);
 		basketRowData = new Object [olists.size()][basketColumName.length];
 		fillOrderData();
 		otable = new JTable(basketRowData,basketColumName);
+		otable.setFont(labelfont);
+		otable.setRowHeight(40);
 		oscrollPane = new JScrollPane(otable);
-		oscrollPane.setBounds(0, 0, 680, 300);
+		oscrollPane.setBounds(0, 0, 690, 300);
 
-		JLabel totalPrice = new JLabel("총 금액");
+
+
+		totalP = new JLabel("총금액 :");
 		price = new JLabel();
 
-		price.setBackground(Color.white);
-		totalPrice.setBounds(150, 320, 100, 50);
-		price.setBounds(270, 320, 100, 50);
+
+		totalP.setBounds(220, 320, 100, 50);
+		price.setBounds(350, 320, 100, 50);
+		totalP.setFont(labelfont);
+		price.setFont(labelfont);
 
 		orderCheckbtn = new JButton("확인");
 		orderExitbtn = new JButton("종료");
 
-		orderCheckbtn.setBounds(100, 390, 100, 50);
-		orderExitbtn.setBounds(250, 390, 100, 50);
-
+		orderCheckbtn.setBounds(150, 390, 100, 50);
+		orderExitbtn.setBounds(350, 390, 100, 50);
+		
+		orderCheckbtn.setFont(buttonfont);
+		orderExitbtn.setFont(buttonfont);
+		
 		orderCheckbtn.addActionListener(this);
 		orderExitbtn.addActionListener(this);
 
-		order.add(totalPrice);
+
+
+		order.add(totalP);
 		order.add(price);
 		order.add(oscrollPane);
 		order.add(orderCheckbtn);
@@ -343,8 +416,12 @@ public class Main extends JFrame implements ActionListener{
 		fillAdproductsData();
 		adtable = new JTable(productRowData,productColumName);
 		adtable.addMouseListener(new MouseHandler());
+
+		adtable.setFont(labelfont);
+		adtable.setRowHeight(40);
+
 		adscrollPane = new JScrollPane(adtable);
-		adscrollPane.setBounds(0, 0, 680, 250);
+		adscrollPane.setBounds(0, 0, 690, 350);
 
 		admin.add(adscrollPane);
 
@@ -355,10 +432,15 @@ public class Main extends JFrame implements ActionListener{
 		JLabel price = new JLabel("가격");
 		JLabel stock = new JLabel("제고");
 
-		code.setBounds(0, 270, 40, 20);
-		name.setBounds(150, 270, 40, 20);
-		price.setBounds(300, 270, 40, 20);
-		stock.setBounds(455, 270, 40, 20);
+		code.setBounds(0, 370, 50, 30);
+		name.setBounds(170, 370, 60, 30);
+		price.setBounds(350, 370, 50, 30);
+		stock.setBounds(520, 370, 50, 30);
+
+		code.setFont(labelfont);
+		name.setFont(labelfont);
+		price.setFont(labelfont);
+		stock.setFont(labelfont);
 
 		admin.add(code);
 		admin.add(name);
@@ -370,10 +452,10 @@ public class Main extends JFrame implements ActionListener{
 		adPriceField = new JTextField();
 		adStockField = new JTextField();
 
-		adCodeField.setBounds(45, 270, 100, 20);
-		adNameField.setBounds(195, 270, 100, 20);
-		adPriceField.setBounds(350, 270, 100, 20);
-		adStockField.setBounds(500, 270, 100, 20);
+		adCodeField.setBounds(60, 370, 100, 20);
+		adNameField.setBounds(240, 370, 100, 20);
+		adPriceField.setBounds(410, 370, 100, 20);
+		adStockField.setBounds(590, 370, 100, 20);
 
 		admin.add(adCodeField);
 		admin.add(adNameField);
@@ -384,13 +466,19 @@ public class Main extends JFrame implements ActionListener{
 
 		JPanel adbutton = new JPanel();
 		adbutton.setLayout(new GridLayout(1,5));
-		adbutton.setBounds(0, 450, 680, 200);
+		adbutton.setBounds(0, 470, 690, 50);
 
 		adminInsertbtn = new JButton("메뉴추가");
 		adminUpdatebtn = new JButton("메뉴변경");
 		adminDeletebtn = new JButton("메뉴삭제");
 		adminOrderbtn = new JButton("주문현황");
 		adminlogoutbtn = new JButton("로그아웃");
+
+		adminInsertbtn.setFont(buttonfont);
+		adminUpdatebtn.setFont(buttonfont);
+		adminDeletebtn.setFont(buttonfont);
+		adminOrderbtn.setFont(buttonfont);
+		adminlogoutbtn.setFont(buttonfont);
 
 		adminInsertbtn.addActionListener(this);
 		adminUpdatebtn.addActionListener(this);
@@ -409,35 +497,44 @@ public class Main extends JFrame implements ActionListener{
 		//주문현황 패널
 		noorder = new JPanel();
 		noorder.setLayout(null);
+		noorder.setBackground(Color.orange);
 		nolists = bdao.getAllProducts();
 		nowOrderRowData = new Object [nolists.size()][nowOrderColumName.length];
 		fillNowOrderData();
 		notable = new JTable(nowOrderRowData,nowOrderColumName);
 		notable.addMouseListener(new MouseHandler());
-		noscrollPane = new JScrollPane(notable);
-		noscrollPane.setBounds(0, 0, 680, 300);
+		
+		notable.setFont(labelfont);
+		notable.setRowHeight(40);
+		noscrollPane = new JScrollPane(notable,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		noscrollPane.setBounds(0, 0, 690, 300);
+		
 
 		noorder.add(noscrollPane);
 
-		JLabel id = new JLabel("id");
-		JLabel count = new JLabel("총 갯수");
-		JLabel totalprice = new JLabel("총 합계");
+		JLabel idlabel = new JLabel("id");
+		JLabel countlabel = new JLabel("총 갯수");
+		JLabel totalpricelabel = new JLabel("총 합계");
+		
+		idlabel.setFont(labelfont);
+		countlabel.setFont(labelfont);
+		totalpricelabel.setFont(labelfont);
 
 		orderid = new JTextField();
 		ordercount = new JTextField();
 		orderprice = new JTextField();
 
-		id.setBounds(0, 320, 50, 50);
-		count.setBounds(190, 320, 50, 50);
-		totalPrice.setBounds(380, 320, 50, 50);
+		idlabel.setBounds(50, 350, 70, 30);
+		countlabel.setBounds(240, 350, 70, 30);
+		totalpricelabel.setBounds(430, 350, 70, 30);
 
-		orderid.setBounds(70, 320, 100, 50);
-		ordercount.setBounds(260, 320, 100, 50);
-		orderprice.setBounds(450, 320, 100, 50);
+		orderid.setBounds(120, 360, 100, 20);
+		ordercount.setBounds(310, 360, 100, 20);
+		orderprice.setBounds(500, 360, 100, 20);
 
-		noorder.add(id);
-		noorder.add(count);
-		noorder.add(totalPrice);
+		noorder.add(idlabel);
+		noorder.add(countlabel);
+		noorder.add(totalpricelabel);
 		noorder.add(orderid);
 		noorder.add(ordercount);
 		noorder.add(orderprice);
@@ -445,8 +542,11 @@ public class Main extends JFrame implements ActionListener{
 		checkOrderbtn = new JButton("확인");
 		exitbtn = new JButton("종료");
 
-		checkOrderbtn.setBounds(50,400,100,20);
-		exitbtn.setBounds(170,400,100,20);
+		checkOrderbtn.setBounds(170,420,100,50);
+		exitbtn.setBounds(430,420,100,50);
+		
+		checkOrderbtn.setFont(buttonfont);
+		exitbtn.setFont(buttonfont);
 
 		checkOrderbtn.addActionListener(this);
 		exitbtn.addActionListener(this);
@@ -466,7 +566,7 @@ public class Main extends JFrame implements ActionListener{
 		contentPane.add(cards);
 		c = (CardLayout) cards.getLayout();
 
-		setSize(620,620);
+		setSize(700,550);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -566,7 +666,7 @@ public class Main extends JFrame implements ActionListener{
 			c.show(cards, "delete");
 		}
 		if(obj == agreeButton) {
-			System.out.println("가입하기 버튼");
+			System.out.println("가입하기 버튼");	
 			boolean result = checkJoinData();
 			if(result) {
 				JoinDto jd = new JoinDto();
@@ -574,6 +674,12 @@ public class Main extends JFrame implements ActionListener{
 				jd.setPw(Integer.parseInt(joinPwField.getText()));
 				jd.setName(joinNameField.getText());
 				jd.setAddr(joinAddrField.getText());
+				Map map = jdao.findId();
+				if(map.get(jd.getId())!=null){
+					JOptionPane.showMessageDialog(this,"이미 존재하는 아이디 입니다.","에러발생",JOptionPane.ERROR_MESSAGE);
+					clearTextField();
+					return;
+				}
 				int cnt = jdao.insertCustomer(jd);
 				if(cnt>0) {
 					System.out.println("가입성공");
@@ -583,6 +689,7 @@ public class Main extends JFrame implements ActionListener{
 				}
 				else {
 					System.out.println("가입실패");
+					JOptionPane.showMessageDialog(this,"회원가입을 실패했습니다.","가입실패",JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		}
@@ -599,7 +706,7 @@ public class Main extends JFrame implements ActionListener{
 				jd.setId(deleteIdField.getText());
 				jd.setPw(Integer.parseInt(deletePwField.getText()));
 				Map<String, Integer> map = jdao.findId();
-				if(map == null ) {
+				if(map.get(jd.getId()) == null ) {
 					JOptionPane.showMessageDialog(this,"id가 존재하지 않습니다","에러발생",JOptionPane.ERROR_MESSAGE);
 					clearTextField();
 				}
@@ -612,13 +719,16 @@ public class Main extends JFrame implements ActionListener{
 
 		if(obj == productsInsertbtn) {
 			System.out.println("담기버튼");
-			int cnt = bdao.insertProduct(bd);
-			if(cnt>0) {
-				System.out.println("담기 성공");
-				getAllProduct();
+			boolean result = checkstock(pd);
+			if(result) {
+				int cnt = bdao.insertProduct(bd);
+				if(cnt>0) {
+					System.out.println("담기 성공");
+					getAllProduct();
+				}
+				else
+					System.out.println("실패");
 			}
-			else
-				System.out.println("실패");
 		}
 		if(obj == productsdeletebtn) {
 			System.out.println("삭제버튼");
@@ -639,6 +749,8 @@ public class Main extends JFrame implements ActionListener{
 		}
 		if(obj == productslogoutbtn) {
 			System.out.println("로그아웃 버튼");
+			clearTextField();
+			JOptionPane.showMessageDialog(this,"로그아웃 되었습니다.","로그아웃",JOptionPane.PLAIN_MESSAGE);
 			c.show(cards, "login");
 
 		}
@@ -733,6 +845,8 @@ public class Main extends JFrame implements ActionListener{
 
 		if(obj == adminlogoutbtn) {
 			System.out.println("로그아웃");
+			clearTextField();
+			JOptionPane.showMessageDialog(this,"로그아웃 되었습니다.","로그아웃",JOptionPane.PLAIN_MESSAGE);
 			c.show(cards, "login");
 		}
 		if(obj == checkOrderbtn) {
@@ -740,8 +854,10 @@ public class Main extends JFrame implements ActionListener{
 			String id = orderid.getText();
 			int cnt = bdao.deleteById(id);
 			if(cnt>0) {
+				JOptionPane.showMessageDialog(this,"주문처리 완료.","완료",JOptionPane.PLAIN_MESSAGE);
 				getAllProductnotable();
 				clearTextField();
+				
 			}
 		}
 		if(obj == exitbtn) {
@@ -750,6 +866,13 @@ public class Main extends JFrame implements ActionListener{
 		}
 
 
+	}
+	private boolean checkstock(ProductsDto pd) {
+		if(pd.getStock()==0) {
+			JOptionPane.showMessageDialog(this,"제고가 없습니다.","에러발생",JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		return true;
 	}
 	private boolean validate(ProductsDto pd) {
 		ArrayList<ProductsDto> list = pdao.getAllProducts();
@@ -774,6 +897,8 @@ public class Main extends JFrame implements ActionListener{
 		nowOrderRowData = new Object [nolists.size()][nowOrderColumName.length];
 		fillNowOrderData();
 		notable = new JTable(nowOrderRowData,nowOrderColumName);
+		notable.setFont(labelfont);
+		notable.setRowHeight(40);
 		noscrollPane.setViewportView(notable);
 		notable.addMouseListener(new MouseHandler());
 	}
@@ -783,6 +908,8 @@ public class Main extends JFrame implements ActionListener{
 		productRowData = new Object [adlists.size()][productColumName.length];
 		fillAdproductsData();
 		adtable = new JTable(productRowData,productColumName);
+		adtable.setFont(labelfont);
+		adtable.setRowHeight(40);
 		adscrollPane.setViewportView(adtable);
 		adtable.addMouseListener(new MouseHandler());
 	}
@@ -792,7 +919,11 @@ public class Main extends JFrame implements ActionListener{
 		basketRowData = new Object [blists.size()][basketColumName.length];
 		fillBasketData();
 		btable = new JTable(basketRowData,basketColumName);
+		btable.setFont(labelfont);
+		btable.setRowHeight(40);
+		btable.setBackground(Color.white);
 		bscrollPane.setViewportView(btable);
+		
 		btable.addMouseListener(new MouseHandler());
 	}
 
@@ -801,6 +932,8 @@ public class Main extends JFrame implements ActionListener{
 		basketRowData = new Object [olists.size()][basketColumName.length];
 		fillOrderData();
 		otable = new JTable(basketRowData,basketColumName);
+		otable.setFont(labelfont);
+		otable.setRowHeight(40);
 		oscrollPane.setViewportView(otable);
 	}
 
@@ -813,14 +946,20 @@ public class Main extends JFrame implements ActionListener{
 				clearTextField();
 				if(cnt>0) 
 					System.out.println("탈퇴 성공");
+				JOptionPane.showMessageDialog(this,"탈퇴 되었습니다.","회원탈퇴",JOptionPane.PLAIN_MESSAGE);
 				c.show(cards, "login");
 			}
 			else {
-				System.out.println("비밀번호가 틀렸습니다");
-				JOptionPane.showMessageDialog(this,"비밀번호가 틀렸습니다","에러발생",JOptionPane.ERROR_MESSAGE);
+				System.out.println("비밀번호가 틀렸습니다.");
+				JOptionPane.showMessageDialog(this,"비밀번호가 틀렸습니다.","에러발생",JOptionPane.ERROR_MESSAGE);
 				clearTextField();
 			}
 		}
+		//		else {
+		//			System.out.println("아이디가 존재하지 않습니다.");
+		//			JOptionPane.showMessageDialog(this,"아이디가 존재하지 않습니다.","에러발생",JOptionPane.ERROR_MESSAGE);
+		//			clearTextField();
+		//		}
 	}
 
 	private boolean checkAdData() {
@@ -950,6 +1089,11 @@ public class Main extends JFrame implements ActionListener{
 			if(obj==ptable) {
 				int row = ptable.getSelectedRow();
 				System.out.println("row:" + row);
+				pd = new ProductsDto();
+				pd.setCode((int)(adtable.getValueAt(row, 0)));
+				pd.setName((String)(adtable.getValueAt(row, 1)));
+				pd.setPrice((int)(adtable.getValueAt(row, 2)));
+				pd.setStock((int)(adtable.getValueAt(row, 3)));
 				bd = new BasketDto();
 				bd.setId(id);
 				bd.setCode((int)(ptable.getValueAt(row, 0)));
